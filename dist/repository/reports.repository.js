@@ -20,7 +20,7 @@ exports.createReport = createReport;
 const getAllReports = async () => {
     const { data, error } = await supabaseClient_1.default
         .from("reports")
-        .select("*")
+        .select("*, Users (name)")
         .order("created_at", { ascending: false });
     if (error) {
         console.error("Supabase error:", error);

@@ -7,7 +7,7 @@ exports.createUser = void 0;
 const supabaseClient_1 = __importDefault(require("../supabaseClient"));
 const createUser = async (userData) => {
     const { data, error } = await supabaseClient_1.default
-        .from("users")
+        .from("Users")
         .insert([userData])
         .select();
     if (error) {

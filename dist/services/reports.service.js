@@ -44,7 +44,17 @@ const createReport = async (reportData) => {
 };
 exports.createReport = createReport;
 const getAllReports = async () => {
-    return await reportsRepository.getAllReports();
+    const reports = await reportsRepository.getAllReports();
+    if (!reports) {
+        return [];
+    }
+    return reports.map((report) => {
+        return {
+            ...report,
+            userName: report.Users?.name || "anonymous",
+            Users: undefined,
+        };
+    });
 };
 exports.getAllReports = getAllReports;
 const getReportById = async (id) => {

@@ -37,13 +37,12 @@ exports.deleteReport = exports.updateReport = exports.getReportById = exports.ge
 const reportService = __importStar(require("../services/reports.service"));
 const createReport = async (req, res, next) => {
     try {
-        const { userId } = req.query;
-        const { title, location, description, tags } = req.body;
-        const reportData = { ...req.body, userId };
-        if (!title || !location || !description || !tags || !userId) {
+        const { title, location, description, tags, user_id } = req.body;
+        const reportData = req.body;
+        if (!title || !location || !description || !tags || !user_id) {
             return res.status(400).json({
                 error: "Missing required fields",
-                required: ["title", "location", "description", "tags", "userId"],
+                required: ["title", "location", "description", "tags", "user_id"],
             });
         }
         const newReport = await reportService.createReport(reportData);
