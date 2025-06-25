@@ -2,10 +2,10 @@
   "name": "dissaster-brodcaster",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/server.js",
+  "main": "app/index.jss",
   "scripts": {
-    "start": "node dist/server.js",
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "start": "node app/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only app/index.js",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,14 +13,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/storage": "^7.16.0",
     "@supabase/supabase-js": "^2.50.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "multer": "^2.0.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/multer": "^1.4.13",
     "@types/node": "^24.0.3",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",

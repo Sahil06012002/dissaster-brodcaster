@@ -1,10 +1,10 @@
 import supabase from "../supabaseClient";
-import { Report } from "../interfaces/reports.interface";
+import { Disaster } from "../interfaces/disaster.interface";
 
-export const createReport = async (newReport: Report) => {
+export const submitDisaster = async (newDisaster: Disaster) => {
   const { data, error } = await supabase
-    .from("reports")
-    .insert([newReport])
+    .from("disasters")
+    .insert([newDisaster])
     .select();
   if (error) {
     console.error("Supabase error:", error);
@@ -13,9 +13,9 @@ export const createReport = async (newReport: Report) => {
   return data[0];
 };
 
-export const getAllReports = async () => {
+export const getAllDisasters = async () => {
   const { data, error } = await supabase
-    .from("reports")
+    .from("disasters")
     .select("*, Users (name)")
     .order("created_at", { ascending: false });
   if (error) {
@@ -25,9 +25,9 @@ export const getAllReports = async () => {
   return data;
 };
 
-export const getReportById = async (id: string) => {
+export const getDisasterById = async (id: string) => {
   const { data, error } = await supabase
-    .from("reports")
+    .from("disasters")
     .select("*")
     .eq("id", id)
     .single();
@@ -41,13 +41,13 @@ export const getReportById = async (id: string) => {
   return data;
 };
 
-export const updateReport = async (
+export const updateDisaster = async (
   id: string,
-  updatedReport: Partial<Report>
+  updatedDisaster: Partial<Disaster>
 ) => {
   const { data, error } = await supabase
-    .from("reports")
-    .update(updatedReport)
+    .from("disasters")
+    .update(updatedDisaster)
     .eq("id", id)
     .select();
   if (error) {
@@ -57,8 +57,8 @@ export const updateReport = async (
   return data[0];
 };
 
-export const deleteReport = async (id: string) => {
-  const { error } = await supabase.from("reports").delete().eq("id", id);
+export const deleteDisaster = async (id: string) => {
+  const { error } = await supabase.from("disasters").delete().eq("id", id);
   if (error) {
     console.error("Supabase error:", error);
     throw new Error(error.message);

@@ -1,9 +1,9 @@
-import { Report } from "../../interfaces/reports.interface";
+import { Disaster } from "../../interfaces/disaster.interface";
 
 declare global {
   namespace Express {
     interface Request {
-      report?: Report;
+      disaster?: Disaster;
     }
   }
 }

@@ -1,6 +1,6 @@
-export interface Report {
+export interface Disaster {
   id?: string;
-  userId: string;
+  user_id: number;
   userName?: string;
   title: string;
   location: string;

@@ -1,13 +1,8 @@
 import { Router } from "express";
-import * as reportController from "../controllers/reports.controller";
 import { catchAsync } from "../utils/catchAsync";
+import * as reportController from "../controllers/report.controller";
 
 const router = Router();
 
-router.post("/", catchAsync(reportController.createReport));
-router.get("/", catchAsync(reportController.getAllReports));
-router.get("/:id", catchAsync(reportController.getReportById));
-router.put("/:id", catchAsync(reportController.updateReport));
-router.delete("/:id", catchAsync(reportController.deleteReport));
-
+router.post("/", catchAsync(reportController.addReport));
 export default router;
