@@ -9,7 +9,7 @@ const addReport = async (report) => {
     const { error, data } = await supabaseClient_1.default
         .from("reports")
         .insert([report])
-        .select();
+        .select("*, Users (name)");
     if (error) {
         console.error("Supabase error:", error);
         throw new Error(error.message);

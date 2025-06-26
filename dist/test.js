@@ -8,4 +8,3 @@ const testObj = {
     user_id: 123,
 };
 const disaster = testObj;
-console.log(disaster);

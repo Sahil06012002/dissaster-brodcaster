@@ -9,4 +9,3 @@ const testObj = {
 };
 const disaster: Disaster = testObj;
 
-console.log(disaster);
