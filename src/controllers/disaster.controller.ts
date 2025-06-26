@@ -54,7 +54,7 @@ export const getDisasterById = async (
     const { id } = req.params;
     const disaster = await disasterService.getDisasterById(id);
     if (!disaster) {
-      return res.status(404).json({ error: "Report not found" });
+      return res.status(404).json({ error: "Disasters not found" });
     }
     res.json({
       message: "Report retrieved successfully",

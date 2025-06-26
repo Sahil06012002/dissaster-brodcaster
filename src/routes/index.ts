@@ -8,7 +8,6 @@ import helperRoutes from "./helper.routes";
 const router = Router();
 
 router.use("/disasters", disasterRoutes);
-// router.use("/reports", reportRoutes);
 router.use("/health", healthRoutes);
 router.use("/users", userRoutes);
 router.use("/helper", helperRoutes);

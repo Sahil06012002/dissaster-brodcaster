@@ -16,8 +16,6 @@ interface FilesInterface {
 const storage = new Storage({
   credentials: keyJson,
 });
-console.log("hello credentials");
-console.log(storage.authClient);
 
 export const getUploadUrl = async (
   req: Request,

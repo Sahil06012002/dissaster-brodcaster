@@ -16,7 +16,12 @@ export const addReport = async (report: Report) => {
 export const getReportsByDisasterId = async (disaster_id: number) => {
   const { error, data } = await supabase
     .from("reports")
-    .select("*")
+    .select(
+      `
+      *,
+      Users(name)
+    `
+    )
     .eq("disaster_id", disaster_id);
   if (error) {
     if (error.code === "PGRST116") {
@@ -25,5 +30,19 @@ export const getReportsByDisasterId = async (disaster_id: number) => {
     console.error("Supabase error:", error);
     throw new Error(error.message);
   }
-  return data;
+  const flattened = data.map((item) => {
+    const { Users, image_link, ...rest } = item;
+    let images = [];
+
+    if (image_link) {
+      images = image_link.split("|");
+    }
+    return {
+      ...rest,
+      images,
+      user_name: Users?.name || null,
+    };
+  });
+
+  return flattened;
 };

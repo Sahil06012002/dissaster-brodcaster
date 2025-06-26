@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import * as reportService from "../services/report.service";
-import multer from "multer";
 
 export const addReport = async (
   req: Request,
@@ -20,6 +19,29 @@ export const addReport = async (
     res.status(201).json({
       message: "Report saved successfully",
       data: newReport,
+    });
+  } catch (error: any) {
+    next(error);
+  }
+};
+
+export const getDisasterReports = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { disaster_id } = req.query;
+    console.log(disaster_id);
+    const reports = await reportService.getReportsByDisasterId(
+      parseInt(disaster_id as string)
+    );
+    if (!reports) {
+      return res.status(404).json({ error: "Report not found" });
+    }
+    res.json({
+      message: "Report retrieved successfully",
+      data: reports,
     });
   } catch (error: any) {
     next(error);
