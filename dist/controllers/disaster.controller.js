@@ -38,7 +38,18 @@ const disasterService = __importStar(require("../services/disaster.service"));
 const submitDisaster = async (req, res, next) => {
     try {
         const { title, location, description, tags, user_id } = req.body;
-        const disasterData = req.body;
+        const address = location.address;
+        const lat = location.lat;
+        const lng = location.lng;
+        const geometryWKT = `POINT(${lng} ${lat})`;
+        const disasterData = {
+            user_id,
+            title,
+            description,
+            location: address,
+            coordinates: geometryWKT,
+            tags,
+        };
         if (!title || !location || !description || !tags || !user_id) {
             return res.status(400).json({
                 error: "Missing required fields",

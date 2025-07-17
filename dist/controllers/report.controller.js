@@ -58,7 +58,6 @@ exports.addReport = addReport;
 const getDisasterReports = async (req, res, next) => {
     try {
         const { disaster_id } = req.query;
-        console.log(disaster_id);
         const reports = await reportService.getReportsByDisasterId(parseInt(disaster_id));
         if (!reports) {
             return res.status(404).json({ error: "Report not found" });

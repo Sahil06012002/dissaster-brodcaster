@@ -6,9 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteDisaster = exports.updateDisaster = exports.getDisasterById = exports.getAllDisasters = exports.submitDisaster = void 0;
 const supabaseClient_1 = __importDefault(require("../supabaseClient"));
 const submitDisaster = async (newDisaster) => {
+    console.log("original:", newDisaster);
+    // const lng = newDisaster.coordinates?.coordinates[0];
+    // const lat = newDisaster.coordinates?.coordinates[1];
+    // const geometryWKT = `POINT(${lng} ${lat})`;
+    const payload = {
+        ...newDisaster,
+        // coordinates: geometryWKT,
+    };
     const { data, error } = await supabaseClient_1.default
         .from("disasters")
-        .insert([newDisaster])
+        .insert([payload])
         .select("*, Users (name)");
     if (error) {
         console.error("Supabase error:", error);

@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import * as disasterService from "../services/disaster.service";
 import { Disaster } from "../interfaces/disaster.interface";
+import { loadavg } from "os";
 
 export const submitDisaster = async (
   req: Request,
@@ -9,8 +10,20 @@ export const submitDisaster = async (
 ) => {
   try {
     const { title, location, description, tags, user_id } = req.body;
+    const address = location.address;
+    const lat = location.lat;
+    const lng = location.lng;
 
-    const disasterData: Disaster = req.body;
+    const geometryWKT = `POINT(${lng} ${lat})`;
+
+    const disasterData: Disaster = {
+      user_id,
+      title,
+      description,
+      location: address,
+      coordinates: geometryWKT,
+      tags,
+    };
 
     if (!title || !location || !description || !tags || !user_id) {
       return res.status(400).json({

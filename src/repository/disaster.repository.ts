@@ -2,15 +2,28 @@ import supabase from "../supabaseClient";
 import { Disaster } from "../interfaces/disaster.interface";
 
 export const submitDisaster = async (newDisaster: Disaster) => {
+  console.log("original:", newDisaster);
+
+  // const lng = newDisaster.coordinates?.coordinates[0];
+  // const lat = newDisaster.coordinates?.coordinates[1];
+
+  // const geometryWKT = `POINT(${lng} ${lat})`;
+
+  const payload = {
+    ...newDisaster,
+    // coordinates: geometryWKT,
+  };
+
   const { data, error } = await supabase
     .from("disasters")
-    .insert([newDisaster])
+    .insert([payload])
     .select("*, Users (name)");
 
   if (error) {
     console.error("Supabase error:", error);
     throw new Error(error.message);
   }
+
   return data[0];
 };
 

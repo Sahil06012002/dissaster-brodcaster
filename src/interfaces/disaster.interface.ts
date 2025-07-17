@@ -4,6 +4,7 @@ export interface Disaster {
   userName?: string;
   title: string;
   location: string;
+  coordinates?: string;
   description: string;
   tags: string[];
   created_at?: string;

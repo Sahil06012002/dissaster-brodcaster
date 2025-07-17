@@ -32,7 +32,6 @@ export const getDisasterReports = async (
 ) => {
   try {
     const { disaster_id } = req.query;
-    console.log(disaster_id);
     const reports = await reportService.getReportsByDisasterId(
       parseInt(disaster_id as string)
     );
